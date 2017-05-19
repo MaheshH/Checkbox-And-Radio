@@ -1,0 +1,144 @@
+@charset "UTF-8";
+$primary-color: rgb(71, 71, 239);
+$primary-color-lighten: rgba(71, 71, 239, 0.3);
+$default-color: grey;
+$default-color-lighten: #ccc;
+@mixin transition($val) {
+  -webkit-transition: $val;
+  -moz-transition: $val;
+  -ms-transition: $val;
+  transition: $val;
+}
+@mixin transition2($val1, $val2) {
+  -webkit-transition: $val1, $val2;
+  -moz-transition: $val1, $val2;
+  -ms-transition: $val1, $val2;
+  transition: $val1, $val2;
+}
+@mixin transform($val1, $val2) {
+  -webkit-transform: $val1 $val2;
+  -moz-transform: $val1 $val2;
+  -ms-transform: $val1 $val2;
+  transform: $val1 $val2;
+}
+@mixin transformScale($val) {
+  -webkit-transform: scale($val);
+  -moz-transform: scale($val);
+  -ms-transform: scale($val);
+  transform: scale($val);
+}
+.iradio, .icheckbox {
+  margin: 10px 0;
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+}
+.iradio>input[type=radio], .icheckbox>input[type=checkbox], .iswitch>input[type=checkbox] {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+.iradio>input+span::before, .icheckbox>input+span::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid $default-color;
+  margin-left: -25px;
+}
+.iradio>input+span::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: $primary-color;
+  top: 5px;
+  left: 9px;
+  border-radius: 50%;
+  @include transformScale(0);
+  @include transition(transform 240ms);
+}
+.iradio>input+span::before{
+  border-radius: 50%;
+}
+.icheckbox>input+span::before {
+  @include transition(background-color 240ms);
+}
+.iradio>input:checked+span::before {
+  border-color: $primary-color;
+}
+.iradio>input:checked+span::after {
+  @include transformScale(1);
+}
+.icheckbox>input+span::after {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 12px;
+  border-left: 2px solid #fff;
+  border-top: 2px solid #fff;
+  top: 2px;
+  left: 11px;
+  @include transform(rotate(-135deg), scale(0));
+  @include transition(transform 240ms);
+}
+.icheckbox>input:checked+span::after {
+  @include transform(rotate(-135deg), scale(1));
+}
+.icheckbox>input:checked+span::before {
+  background-color: $primary-color;
+  border-color: $primary-color;
+}
+.iradio:hover>input:not(:checked)+span::before {
+  border-color: $primary-color-lighten;
+}
+.iradio:hover>input:not(:checked)+span::after {
+  @include transformScale(1);
+  background-color: $primary-color-lighten;
+}
+.icheckbox:hover>input:not(:checked)+span::before {
+  background-color: $primary-color-lighten;
+  border-color: $primary-color-lighten;
+}
+.icheckbox:hover>input:not(:checked)+span::after {
+  @include transform(rotate(-135deg), scale(1));
+}
+.iswitch {
+  position: relative;
+  width: 80px;
+  height: 35px;
+}
+.iswitch>div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  background-color: $default-color-lighten;
+  border-radius: 35px;
+  @include transition2(left 240ms, background-color 480ms);
+}
+.iswitch>div::before {
+  content: '\2716';
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  left: 6%;
+  bottom: 4px;
+  background-color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 26px;
+  font-size: 16px;
+  color: red;
+  @include transition(left 240ms);
+}
+.iswitch>input:checked+div::before {
+  left: 60%;
+  content: '\2714';
+  color: green;
+}
+.iswitch>input:checked+div {
+  background-color: $primary-color;
+}
