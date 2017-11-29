@@ -29,5 +29,4 @@ Version 1.0.0
   ````
 
 ###  Note:
-1. This css requires bootstrap.
-2. The SCSS file included can be used to change the primary color. Currently it is '#4747ef'.
+1. The SCSS file included can be used to change the primary color. Currently it is '#4747ef'.
